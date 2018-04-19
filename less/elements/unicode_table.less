@@ -1,0 +1,76 @@
+@cols_1: 319px;
+@cols_2: 470px;
+@cols_3: 600px;
+@cols_4: 750px;
+@cols_5: 950px;
+.unicode_table {
+    .clean_list();
+    .clear_after();
+    background-color: @color_grey_light;
+    border-top: 1px solid @color_grey_dark;
+    border-left: 1px solid @color_grey_dark;
+    &.unicode_table_head_line {
+        li {
+            border-bottom: 1px solid @color_grey_dark;
+            @media (max-width: @cols_5) {
+                &.col_6 {
+                    display: none;
+                }
+            }
+            @media (max-width: @cols_4) {
+                &.col_5 {
+                    display: none;
+                }
+            }
+            @media (max-width: @cols_3) {
+                &.col_4 {
+                    display: none;
+                }
+            }
+            @media (max-width: @cols_2) {
+                &.col_3 {
+                    display: none;
+                }
+            }
+            @media (max-width: @cols_1) {
+                &.col_2 {
+                    display: none;
+                }
+            }
+        }
+    }
+    li {
+        display: block;
+        float: left;
+        .clear_after();
+        border-right: 1px solid @color_grey_dark;
+        border-bottom: 1px solid @color_grey_dark;
+        .field_1, .field_2 {
+            float: left;
+            line-height: @distance_normal;
+            width: 50%;
+            padding: @distance_tiny;
+        }
+        .field_1 {
+        }
+        .field_2 {
+        }
+        //width
+        width: 100% / 6;
+        @media (max-width: @cols_5) {
+            width: 100% / 5;
+        }
+        @media (max-width: @cols_4) {
+            width: 100% / 4;
+        }
+        @media (max-width: @cols_3) {
+            width: 100% / 3;
+        }
+        @media (max-width: @cols_2) {
+            width: 100% / 2;
+        }
+        @media (max-width: @cols_1) {
+            width: 100%;
+        }
+    }
+}

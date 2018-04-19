@@ -1,6 +1,30 @@
+//Config
+var config = {
+    css: [
+        'less/html42/html42_mixins.less',
+        'less/settings.less',
+        'less/base.less',
+        'less/elements/header.less',
+        'less/elements/navigation.less',
+        'less/elements/unicode_table.less',
+        'less/elements/box.less',
+        'less/elements/buttons.less',
+        'less/elements/converter.less'
+    ],
+    js: [
+        'js/project.js',
+        'js/jquery/jquery-3.1.0.js',
+        'js/html42/xtreme.js',
+        'js/html42/technologies/list_length.js',
+        'js/html42/technologies/ajax_links.js'
+    ]
+};
+
+//
 var gulp = require('gulp');
 var watch = require('gulp-watch');
 var path = require('path');
+var concat = require('gulp-concat');
 //
 var jshint = require('gulp-jshint');
 var jsmin = require('gulp-jsmin');
@@ -23,6 +47,7 @@ var imageminGuetzli = require('imagemin-guetzli');
 gulp.task('default', ['clean', 'less', 'js', 'images'], function () {
     console.log('Assets built!');
 });
+
 //Gulp Tasks
 gulp.task('images', function () {
     var png_1 = imageminPngquant({
@@ -59,11 +84,12 @@ gulp.task('images', function () {
             ])).pipe(gulp.dest('./assets/images/'));
 });
 gulp.task('less', function () {
-    return gulp.src('./less/files/**/*')
+    return gulp.src(config.css)
+            .pipe(concat('styles.css'))
             .pipe(sourcemaps.init())
             .pipe(less())
             .pipe(base64({
-                baseDir: './assets/images/',
+                baseDir: 'assets/images/',
                 maxImageSize: 10 * 1024
             }))
             .pipe(sourcemaps.write())
@@ -77,10 +103,12 @@ gulp.task('js', function () {
             .pipe(sourcemaps.write())
             .pipe(gulp.dest('./assets/js/'));
 });
+//
 gulp.task('css-min', function () {
     return gulp.src('./assets/css/*.css')
+            .pipe(concat('styles.min.css'))
             .pipe(minifyCSS())
-            .pipe(gulp.dest('./assets/css/min/'));
+            .pipe(gulp.dest('./assets/css/'));
 });
 gulp.task('js-min', function () {
     return gulp.src('./assets/js/*.js')
@@ -95,12 +123,11 @@ gulp.task('build', ['clean'], function () {
     gulp.start('build2');
 });
 gulp.task('build2', ['images'], function () {
-    gulp.start('less');
-    gulp.start('js');
-    setTimeout(function () {
+    gulp.start('build3');
+});
+gulp.task('build3', ['less', 'js'], function () {
         gulp.start('css-min');
         gulp.start('js-min');
-    }, 500);
 });
 gulp.task('watch', ['watch-less', 'watch-js', 'watch-images'], function () {
     console.log('Watching LESS, JS, Images');

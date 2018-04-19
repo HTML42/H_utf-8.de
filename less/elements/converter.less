@@ -1,0 +1,64 @@
+#convert_form {
+    .input, .input [name=input], .input [type=file], .output, .output_file {
+        width: 100%;
+        border-radius: @distance_tiny;
+    }
+    .input {
+        [name=input], [type=file] {
+            border: 1px solid @color_border_normal;
+            height: 200px;
+            outline: none;
+            padding: @distance_small;
+            &:hover, &:focus {
+                border-color: @color_border_dark;
+            }
+            &:focus {
+                box-shadow: @box_shadow;
+            }
+        }
+        [type=file] {
+            height: auto;
+            -webkit-appearance: none;
+            vertical-align: middle;
+        }
+    }
+    .button {
+        margin-top: @distance_small;
+        font-weight: 700;
+        font-size: 20px;
+        text-align: center;
+        border-radius: @distance_tiny;
+        width: calc(~"50% - (@{distance_small} / 2)");
+        float: left;
+        padding-left: 0;
+        padding-right: 0;
+        outline: none;
+        + .button {
+            margin-left: @distance_small;
+        }
+    }
+    .fixfile {
+        width: 100%;
+        float: none;
+    }
+    .clear {
+        .clear();
+    }
+    .output, .output_file {
+        margin-top: @distance_small;
+        padding: @distance_small;
+        background: @color_grey_light;
+        color: @color_grey_dark;
+        resize: none;
+    }
+    .output_file {
+        height: 150px;
+    }
+    hr {
+        margin: @distance_big;
+    }
+}
+#__ajax_form__ {
+    .clear();
+    opacity: 0;
+}
