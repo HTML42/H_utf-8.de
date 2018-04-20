@@ -33,8 +33,8 @@
     <?php } ?>
 </ul>
 
-<ul class="unicode_table">
-    <?php for ($i = 1; $i <= 2052; $i++) { ?>
+<ul class="unicode_table unicode_table_charaters">
+    <?php for ($i = 1; $i <= 128; $i++) { ?>
         <li>
             <div class="field_1">&amp;#<?= $i ?>;</div>
             <div class="field_2">&#<?= $i ?>;</div>

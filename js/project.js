@@ -41,7 +41,25 @@ Xtreme_startup_calls.push(function () {
             });
         });
     });
+    setTimeout(add_char, 1);
 });
+
+var char_index = 257;
+var unicode_table_charaters = document.getElementsByClassName('unicode_table_charaters');
+if (typeof unicode_table_charaters[0] != 'undefined') {
+    setTimeout(add_char, 50);
+}
+function add_char() {
+    if (char_index <= 2048) {
+        for (var i = 0; i < 6; i++) {
+            var li = document.createElement('li');
+            li.innerHTML = '<div class="field_1">&amp;#' + char_index + ';</div><div class="field_2">&#' + char_index + ';</div>';
+            unicode_table_charaters[0].appendChild(li);
+            char_index++;
+        }
+        setTimeout(add_char, 0);
+    }
+}
 
 function get_iframe_content(iframe) {
     var x = $(iframe).get(0);
